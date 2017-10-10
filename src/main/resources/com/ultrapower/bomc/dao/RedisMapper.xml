@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ultrapower.bomc.dao.RedisMapper">
+  <resultMap id="BaseResultMap" type="com.ultrapower.bomc.pojo.Redis">
+    <id column="redisid" jdbcType="INTEGER" property="redisid" />
+    <result column="sys_cpu_rate" jdbcType="REAL" property="sysCpuRate" />
+    <result column="usr_cpu_rate" jdbcType="REAL" property="usrCpuRate" />
+    <result column="redis_name" jdbcType="VARCHAR" property="redisName" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    redisid, sys_cpu_rate, usr_cpu_rate, redis_name
+  </sql>
+  <select id="selectByExample" parameterType="com.ultrapower.bomc.pojo.RedisExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from redis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from redis
+    where redisid = #{redisid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from redis
+    where redisid = #{redisid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.ultrapower.bomc.pojo.RedisExample">
+    delete from redis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.ultrapower.bomc.pojo.Redis">
+    insert into redis (redisid, sys_cpu_rate, usr_cpu_rate, 
+      redis_name)
+    values (#{redisid,jdbcType=INTEGER}, #{sysCpuRate,jdbcType=REAL}, #{usrCpuRate,jdbcType=REAL}, 
+      #{redisName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ultrapower.bomc.pojo.Redis">
+    insert into redis
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="redisid != null">
+        redisid,
+      </if>
+      <if test="sysCpuRate != null">
+        sys_cpu_rate,
+      </if>
+      <if test="usrCpuRate != null">
+        usr_cpu_rate,
+      </if>
+      <if test="redisName != null">
+        redis_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="redisid != null">
+        #{redisid,jdbcType=INTEGER},
+      </if>
+      <if test="sysCpuRate != null">
+        #{sysCpuRate,jdbcType=REAL},
+      </if>
+      <if test="usrCpuRate != null">
+        #{usrCpuRate,jdbcType=REAL},
+      </if>
+      <if test="redisName != null">
+        #{redisName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.ultrapower.bomc.pojo.RedisExample" resultType="java.lang.Long">
+    select count(*) from redis
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update redis
+    <set>
+      <if test="record.redisid != null">
+        redisid = #{record.redisid,jdbcType=INTEGER},
+      </if>
+      <if test="record.sysCpuRate != null">
+        sys_cpu_rate = #{record.sysCpuRate,jdbcType=REAL},
+      </if>
+      <if test="record.usrCpuRate != null">
+        usr_cpu_rate = #{record.usrCpuRate,jdbcType=REAL},
+      </if>
+      <if test="record.redisName != null">
+        redis_name = #{record.redisName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update redis
+    set redisid = #{record.redisid,jdbcType=INTEGER},
+      sys_cpu_rate = #{record.sysCpuRate,jdbcType=REAL},
+      usr_cpu_rate = #{record.usrCpuRate,jdbcType=REAL},
+      redis_name = #{record.redisName,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ultrapower.bomc.pojo.Redis">
+    update redis
+    <set>
+      <if test="sysCpuRate != null">
+        sys_cpu_rate = #{sysCpuRate,jdbcType=REAL},
+      </if>
+      <if test="usrCpuRate != null">
+        usr_cpu_rate = #{usrCpuRate,jdbcType=REAL},
+      </if>
+      <if test="redisName != null">
+        redis_name = #{redisName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where redisid = #{redisid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ultrapower.bomc.pojo.Redis">
+    update redis
+    set sys_cpu_rate = #{sysCpuRate,jdbcType=REAL},
+      usr_cpu_rate = #{usrCpuRate,jdbcType=REAL},
+      redis_name = #{redisName,jdbcType=VARCHAR}
+    where redisid = #{redisid,jdbcType=INTEGER}
+  </update>
+</mapper>
