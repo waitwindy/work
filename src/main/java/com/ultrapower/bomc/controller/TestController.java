@@ -29,6 +29,7 @@ public class TestController {
 		user.setPassword(password);
 		testService.insert(user);
 		return "TestController";
+
 	}
 	
 }

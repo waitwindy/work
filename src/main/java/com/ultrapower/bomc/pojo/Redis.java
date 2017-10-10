@@ -40,4 +40,14 @@ public class Redis {
     public void setRedisName(String redisName) {
         this.redisName = redisName == null ? null : redisName.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Redis{" +
+                "redisid=" + redisid +
+                ", sysCpuRate=" + sysCpuRate +
+                ", usrCpuRate=" + usrCpuRate +
+                ", redisName='" + redisName + '\'' +
+                '}';
+    }
 }

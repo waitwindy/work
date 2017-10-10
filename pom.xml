@@ -19,6 +19,12 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+            <version>5.0.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
@@ -223,7 +229,7 @@
     </profiles>
 
     <build>
-        <finalName>BOMC-ITOA</finalName>
+        <finalName>BOMC6</finalName>
         <plugins>
 
             <plugin>
@@ -243,12 +249,19 @@
                 <version>1.1</version>
                 <configuration>
                     <path>/</path>
-                    <port>8082</port>
+                    <port>8088</port>
                     <uriEncoding>UTF-8</uriEncoding>
-                    <url>http://localhost:8082/manager/test</url>
+                    <url>http://localhost:8088/manager/test</url>
                     <server>tomcat7</server>
                 </configuration>
             </plugin>
+
+
+                <!-- com.github.pagehelper为PageHelper类所在包名 -->
+                <!--<plugin   interceptor="com.github.pagehelper.PageHelper">-->
+                    <!--&lt;!&ndash; 设置数据库类型 Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库&ndash;&gt;-->
+                    <!--<property name="dialect" value="mysql"/>-->
+                <!--</plugin>-->
 
 
         </plugins>

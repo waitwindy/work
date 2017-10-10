@@ -15,5 +15,5 @@ public class TestServiceImpl implements TestService{
 	public void insert(Myuser user) {
 		myuserMapper.insertSelective(user);
 	}
-	
+
 }
