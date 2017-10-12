@@ -34,7 +34,7 @@ public class TestMVC {
 
     @Test
     public void testPage() throws Exception {
-        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/redis").param("pn","5")).andReturn();
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/redis.html").param("pn","5")).andReturn();
         MockHttpServletRequest request = result.getRequest();
         PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
         System.out.println(pi.getPageNum());
